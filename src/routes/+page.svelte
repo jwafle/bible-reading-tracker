@@ -18,13 +18,13 @@
 <div class="flex min-h-screen items-center justify-center">
 	<div class="flex flex-col">
 		{#if user}
+			<h2 class="text-xl">Hey, I know you!</h2>
+		{:else}
 			<h2 class="text-xl">Hmmm... have we met before?</h2>
 			<h3 class="text-xl">
 				Please <a href="/auth" class="text-xl font-bold">Login</a> or
 				<a href="/auth" class="text-xl font-bold">Signup</a>
 			</h3>
-		{:else}
-			<h2 class="text-xl">Hey, I know you!</h2>
 		{/if}
 	</div>
 </div>
