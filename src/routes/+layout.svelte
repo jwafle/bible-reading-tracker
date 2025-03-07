@@ -41,10 +41,10 @@
 					></path>
 				</svg>
 			</div>
-			<ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box w-52 p-2 shadow">
+			<ul class="dropdown-content menu bg-base-100 rounded-box w-52 p-2 shadow">
 				{#if user}
 					<li><a href="/settings">Settings</a></li>
-					<li><button on:click={signOut}>Log out</button></li>
+					<li><button onclick={signOut}>Log out</button></li>
 				{:else}
 					<li><a href="/auth">Log in</a></li>
 				{/if}

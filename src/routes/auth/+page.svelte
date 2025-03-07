@@ -1,35 +1,62 @@
+<script lang="ts">
+	// Define loading states for each button
+	let loadingLogin = false;
+	let loadingSignup = false;
+</script>
+
 <div class="flex min-h-screen items-center justify-center">
-	<form method="POST" action="?/login" class="w-1/3 space-y-4">
-		<h2 class="text-xl">Welcome!</h2>
-		<div class="form-control">
-			<label class="label">
-				<span class="label-text">Email</span>
-			</label>
-			<input
-				name="email"
-				type="email"
-				placeholder="promise we won't ever send you annoying emails"
-				class="input input-bordered w-full"
-				required
-			/>
-		</div>
+	<div class="card card-border w-1/3">
+		<div class="card-body">
+			<h2 class="card-title">Welcome!</h2>
+			<form method="POST" action="?/login" class="space-y-4">
+				<div class="form-control">
+					<label class="label" for="email">
+						<span class="label-text">Email</span>
+					</label>
+					<input
+						name="email"
+						type="email"
+						placeholder="promise we won't ever send you annoying emails"
+						class="input input-bordered w-full"
+						required
+					/>
+				</div>
 
-		<div class="form-control">
-			<label class="label">
-				<span class="label-text">Password</span>
-			</label>
-			<input
-				name="password"
-				type="password"
-				placeholder="shhh... it's a secret"
-				class="input input-bordered w-full"
-				required
-			/>
-		</div>
+				<div class="form-control">
+					<label class="label" for="password">
+						<span class="label-text">Password</span>
+					</label>
+					<input
+						name="password"
+						type="password"
+						placeholder="shhh... it's a secret"
+						class="input input-bordered w-full"
+						required
+					/>
+				</div>
 
-		<div class="space-x-2">
-			<button class="btn btn-primary">Login</button>
-			<button formaction="?/signup" class="btn btn-secondary">Sign up</button>
+				<div class="card-actions justify-end">
+					<button
+						class="btn btn-primary"
+						disabled={loadingLogin || loadingSignup}
+						onclick={() => (loadingLogin = true)}
+					>
+						Login
+						<span class="loading loading-bars loading-xs"></span>
+					</button>
+					<button
+						formaction="?/signup"
+						class="btn btn-secondary"
+						disabled={loadingSignup || loadingLogin}
+						onclick={() => (loadingSignup = true)}
+					>
+						Sign up
+						{#if loadingSignup}
+							<span class="loading loading-bars loading-xs"></span>
+						{/if}
+					</button>
+				</div>
+			</form>
 		</div>
-	</form>
+	</div>
 </div>
