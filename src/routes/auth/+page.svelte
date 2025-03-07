@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	let loading = false; // Single loading state for simplicity
+	let loadingLogin = false;
+	let loadingSignup = false;
 </script>
 
 <div class="flex min-h-screen items-center justify-center">
@@ -9,8 +10,14 @@
 			<h2 class="card-title">Welcome!</h2>
 			<form
 				method="POST"
-				use:enhance={() => {
-					loading = true; // Set loading state when submission starts
+				use:enhance={({ formElement, submitter }) => {
+					// Determine which button was clicked (or default submitter)
+					const action = submitter?.getAttribute('formaction');
+					if (action === '?/login') {
+						loadingLogin = true;
+					} else if (action === '?/signup') {
+						loadingSignup = true;
+					}
 				}}
 				class="space-y-4"
 			>
@@ -41,15 +48,23 @@
 				</div>
 
 				<div class="card-actions justify-end">
-					<button formaction="?/login" class="btn btn-primary" disabled={loading}>
+					<button
+						formaction="?/login"
+						class="btn btn-primary"
+						disabled={loadingLogin || loadingSignup}
+					>
 						Login
-						{#if loading}
+						{#if loadingLogin}
 							<span class="loading loading-bars loading-xs"></span>
 						{/if}
 					</button>
-					<button formaction="?/signup" class="btn btn-secondary" disabled={loading}>
+					<button
+						formaction="?/signup"
+						class="btn btn-secondary"
+						disabled={loadingLogin || loadingSignup}
+					>
 						Sign up
-						{#if loading}
+						{#if loadingSignup}
 							<span class="loading loading-bars loading-xs"></span>
 						{/if}
 					</button>
