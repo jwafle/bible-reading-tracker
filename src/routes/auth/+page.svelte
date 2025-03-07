@@ -37,12 +37,15 @@
 
 				<div class="card-actions justify-end">
 					<button
+						formaction="?/login"
 						class="btn btn-primary"
 						disabled={loadingLogin || loadingSignup}
 						onclick={() => (loadingLogin = true)}
 					>
 						Login
-						<span class="loading loading-bars loading-xs"></span>
+						{#if loadingLogin}
+							<span class="loading loading-bars loading-xs"></span>
+						{/if}
 					</button>
 					<button
 						formaction="?/signup"
